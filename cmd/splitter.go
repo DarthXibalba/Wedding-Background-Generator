@@ -11,11 +11,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	flag_imgWidth  int
-	flag_imgHeight int
-)
-
 // splitAppendCmd represents the splitter command
 var splitAppendCmd = &cobra.Command{
 	Use:   "split",
@@ -40,11 +35,11 @@ var splitAppendCmd = &cobra.Command{
 
 		newHeight := origHeight
 		newWidth := origWidth * 2
-		if flag_imgHeight > 0 {
-			newHeight = flag_imgHeight
+		if flag_outputHeight > 0 {
+			newHeight = flag_outputHeight
 		}
-		if flag_imgWidth > 0 {
-			newWidth = flag_imgWidth
+		if flag_outputWidth > 0 {
+			newWidth = flag_outputWidth
 		}
 
 		// Create a new canvas with double the width to accommodate the RLRL pattern
@@ -72,15 +67,6 @@ var splitAppendCmd = &cobra.Command{
 	},
 }
 
-func max(a int, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func init() {
-	splitAppendCmd.Flags().IntVarP(&flag_imgHeight, "height", "H", 1500, "Sets the height (in pixels) of the resultant image. Default value will result in the output image height being the input image height.")
-	splitAppendCmd.Flags().IntVarP(&flag_imgWidth, "width", "W", 2100, "Sets the width (in pixels) of the resultant image. Default value will result in the output image width being double of the input image width.")
 	rootCmd.AddCommand(splitAppendCmd)
 }
